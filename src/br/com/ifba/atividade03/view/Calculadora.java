@@ -41,9 +41,9 @@ public class Calculadora extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblAnoNascimento.setText("Ano de nascimento:");
-        getContentPane().add(lblAnoNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
+        getContentPane().add(lblAnoNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
 
-        btnCalcular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/atividade03/images/2824440_calculator_math_school_tool_icon.png"))); // NOI18N
+        btnCalcular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/atividade03/images/calculadora.png"))); // NOI18N
         btnCalcular.setText("Calcular");
         btnCalcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,10 +60,12 @@ public class Calculadora extends javax.swing.JFrame {
         lblIdadeResultado.setMaximumSize(new java.awt.Dimension(10, 20));
         lblIdadeResultado.setMinimumSize(new java.awt.Dimension(10, 20));
         lblIdadeResultado.setPreferredSize(new java.awt.Dimension(10, 20));
-        getContentPane().add(lblIdadeResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
-        getContentPane().add(spnAnoNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 90, 30));
+        getContentPane().add(lblIdadeResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 70, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/atividade03/images/1120619_businessman_client_man_manager_person_icon.png"))); // NOI18N
+        spnAnoNascimento.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().add(spnAnoNascimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 100, 30));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/atividade03/images/pessoa.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 200, 160));
 
         pack();
@@ -71,7 +73,14 @@ public class Calculadora extends javax.swing.JFrame {
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
         // TODO add your handling code here:
-        
+         // Pega o valor do spinner e converte para inteiro
+    int anoNascimento = (int) spnAnoNascimento.getValue();
+
+    int anoAtual = 2025;
+    int idade = anoAtual - anoNascimento;
+
+    // Mostra o resultado no label
+    lblIdadeResultado.setText(String.valueOf(idade));
     }//GEN-LAST:event_btnCalcularActionPerformed
 
     /**
