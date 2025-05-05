@@ -27,19 +27,55 @@ public class Genio extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblValor = new javax.swing.JLabel();
+        spnValor = new javax.swing.JSpinner();
+        btnPalpite = new javax.swing.JButton();
+        lblGenio = new javax.swing.JLabel();
+        lblTextInBubble = new javax.swing.JLabel();
+        lblBubbleText = new javax.swing.JLabel();
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/atividade04/images/empty-speech-bubble-pixel-chat-bubble-transparent-11562869668kisluztnvz-removebg-preview.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/atividade04/images/teste.png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, -70, -1, -1));
+        lblValor.setText("Valor");
+        getContentPane().add(lblValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, -1, -1));
+
+        spnValor.setModel(new javax.swing.SpinnerNumberModel(1, 1, 5, 1));
+        getContentPane().add(spnValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, -1, -1));
+
+        btnPalpite.setText("Palpite");
+        btnPalpite.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPalpiteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnPalpite, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, -1, -1));
+
+        lblGenio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/atividade04/images/Akinator_4_inspiration_legere__1_-removebg-preview (2).png"))); // NOI18N
+        getContentPane().add(lblGenio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, -1, -1));
+
+        lblTextInBubble.setText("<html>Vou pensar em um<br>valor entre <b>1 e 5</b>.<br>Tente adivinhar</html>");
+        getContentPane().add(lblTextInBubble, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
+
+        lblBubbleText.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/atividade04/images/images-removebg-preview.png"))); // NOI18N
+        getContentPane().add(lblBubbleText, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnPalpiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPalpiteActionPerformed
+        // TODO add your handling code here:
+        int numeroPensado = (int)(1 + Math.random() * 5); 
+    int palpite = (Integer) spnValor.getValue(); 
+
+    if (palpite == numeroPensado) {
+        lblTextInBubble.setText("<html>Acertou, miseravi!</html>");
+    } else {
+        lblTextInBubble.setText("<html>ERROOOOU!<br>Eu pensei no valor <b>" + numeroPensado + "</b></html>");
+    }
+    }//GEN-LAST:event_btnPalpiteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -77,7 +113,12 @@ public class Genio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPalpite;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblBubbleText;
+    private javax.swing.JLabel lblGenio;
+    private javax.swing.JLabel lblTextInBubble;
+    private javax.swing.JLabel lblValor;
+    private javax.swing.JSpinner spnValor;
     // End of variables declaration//GEN-END:variables
 }
