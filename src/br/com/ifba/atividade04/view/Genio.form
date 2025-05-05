@@ -81,11 +81,14 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblTextInBubble">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="20" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="&lt;html&gt;Vou pensar em um&lt;br&gt;valor entre &lt;b&gt;1 e 5&lt;/b&gt;.&lt;br&gt;Tente adivinhar&lt;/html&gt;"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="120" y="70" width="-1" height="-1"/>
+          <AbsoluteConstraints x="110" y="70" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>

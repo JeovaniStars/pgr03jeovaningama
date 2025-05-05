@@ -56,8 +56,9 @@ public class Genio extends javax.swing.JFrame {
         lblGenio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/atividade04/images/Akinator_4_inspiration_legere__1_-removebg-preview (2).png"))); // NOI18N
         getContentPane().add(lblGenio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, -1, -1));
 
+        lblTextInBubble.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         lblTextInBubble.setText("<html>Vou pensar em um<br>valor entre <b>1 e 5</b>.<br>Tente adivinhar</html>");
-        getContentPane().add(lblTextInBubble, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
+        getContentPane().add(lblTextInBubble, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, -1, -1));
 
         lblBubbleText.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ifba/atividade04/images/images-removebg-preview.png"))); // NOI18N
         getContentPane().add(lblBubbleText, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
