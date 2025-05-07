@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package br.com.ifba.atividade06.view;
-
+import javax.swing.DefaultListModel;
 /**
  *
  * @author Bruno
@@ -12,10 +12,36 @@ public class Arrays extends javax.swing.JFrame {
 
     /**
      * Creates new form Arrays
+     * 
+     * 
      */
+    
+    private int[] vetor = new int[10]; // Array para armazenar os valores
+    private DefaultListModel<String> listModel = new DefaultListModel<>(); // Modelo da JList
+    private int selecionado = 0; // Índice da posição selecionada
+
     public Arrays() {
         initComponents();
+        atualizarLista(); // Atualiza a lista ao iniciar
+        lstTabela.setSelectedIndex(0); // Seleciona a primeira posição como padrão
+
+        // Adiciona um listener para capturar a posição selecionada
+        lstTabela.addListSelectionListener(e -> {
+            selecionado = lstTabela.getSelectedIndex();
+            lblCasa.setText("[" + selecionado + "]");
+        });
     }
+
+    // Atualiza os valores exibidos na JList
+    private void atualizarLista() {
+        listModel.clear();
+        for (int i = 0; i < vetor.length; i++) {
+            listModel.addElement("[" + i + "] -> " + vetor[i]);
+        }
+        lstTabela.setModel(listModel);
+    }
+
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,21 +52,75 @@ public class Arrays extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstTabela = new javax.swing.JList<>();
+        lblVetor = new javax.swing.JLabel();
+        lblCasa = new javax.swing.JLabel();
+        spnNumero = new javax.swing.JSpinner();
+        btnAdicionar = new javax.swing.JButton();
+        btnRemover = new javax.swing.JButton();
+        btnOrdenar = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lstTabela.setModel(new DefaultListModel<String>());
+        jScrollPane1.setViewportView(lstTabela);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, 80, 230));
+
+        lblVetor.setText("Vetor");
+        getContentPane().add(lblVetor, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, -1, -1));
+
+        lblCasa.setText("[0]");
+        getContentPane().add(lblCasa, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, -1, -1));
+        getContentPane().add(spnNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+
+        btnAdicionar.setText("Adicionar");
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAdicionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, -1, -1));
+
+        btnRemover.setText("Remover");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRemover, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 80, -1));
+
+        btnOrdenar.setText("Ordenar");
+        btnOrdenar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrdenarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnOrdenar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 80, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        // TODO add your handling code here:
+        int numero = (int) spnNumero.getValue();
+        vetor[selecionado] = numero; // Adiciona o número na posição selecionada
+        atualizarLista(); // Atualiza a JList
+    }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        // TODO add your handling code here:
+        vetor[selecionado] = 0; // Define a posição selecionada como 0
+        atualizarLista(); // Atualiza a JList
+    }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void btnOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenarActionPerformed
+        // TODO add your handling code here:
+        java.util.Arrays.sort(vetor); // Ordena o array
+        atualizarLista(); // Atualiza a JList
+    }//GEN-LAST:event_btnOrdenarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -68,7 +148,7 @@ public class Arrays extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Arrays.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        java.awt.EventQueue.invokeLater(() -> new Arrays().setVisible(true));
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -78,5 +158,13 @@ public class Arrays extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnOrdenar;
+    private javax.swing.JButton btnRemover;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCasa;
+    private javax.swing.JLabel lblVetor;
+    private javax.swing.JList<String> lstTabela;
+    private javax.swing.JSpinner spnNumero;
     // End of variables declaration//GEN-END:variables
 }
