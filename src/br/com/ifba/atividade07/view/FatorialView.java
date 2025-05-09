@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package br.com.ifba.atividade07.view;
-
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 /**
  *
  * @author Bruno
@@ -13,9 +16,50 @@ public class FatorialView extends javax.swing.JFrame {
     /**
      * Creates new form FatorialView
      */
+
+
     public FatorialView() {
-        initComponents();
+        // Configuração da janela
+        setTitle("Calculadora de Fatorial");
+        setSize(300, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridLayout(4, 1, 10, 10));
+
+        // Inicialização dos componentes
+        spnValor = new JSpinner(new SpinnerNumberModel(0, 0, 20, 1)); // Spinner de 0 a 20
+        lblFormula = new JLabel("Fórmula: ");
+        lblResultado = new JLabel("Resultado: ");
+        btnCalcular = new JButton("Calcular");
+
+        // Adiciona um ouvinte de ação ao botão
+        btnCalcular.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calcularFatorial();
+            }
+        });
+
+        // Adiciona os componentes à janela
+        add(new JLabel("Escolha um número:"));
+        add(spnValor);
+        add(btnCalcular);
+        add(lblFormula);
+        add(lblResultado);
     }
+
+    private void calcularFatorial() {
+        // Obtém o valor do spinner
+        int valor = (int) spnValor.getValue();
+
+        // Instancia a classe Fatorial e calcula
+        Fatorial fatorial = new Fatorial();
+        fatorial.setValor(valor);
+
+        // Atualiza os labels com a fórmula e o resultado
+        lblFormula.setText("Fórmula: " + fatorial.getFormula());
+        lblResultado.setText("Resultado: " + fatorial.getFatorial());
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,21 +70,41 @@ public class FatorialView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        lblValor = new javax.swing.JLabel();
+        spnValor = new javax.swing.JSpinner();
+        btnCalcular = new javax.swing.JButton();
+        lblFormula = new javax.swing.JLabel();
+        lblResultado = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblValor.setText("Valor");
+        getContentPane().add(lblValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+
+        spnValor.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
+        getContentPane().add(spnValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
+
+        btnCalcular.setText("Calcular");
+        btnCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
+
+        lblFormula.setText("Formula");
+        getContentPane().add(lblFormula, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+
+        lblResultado.setText("Resultado");
+        getContentPane().add(lblResultado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCalcularActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +142,10 @@ public class FatorialView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCalcular;
+    private javax.swing.JLabel lblFormula;
+    private javax.swing.JLabel lblResultado;
+    private javax.swing.JLabel lblValor;
+    private javax.swing.JSpinner spnValor;
     // End of variables declaration//GEN-END:variables
 }
