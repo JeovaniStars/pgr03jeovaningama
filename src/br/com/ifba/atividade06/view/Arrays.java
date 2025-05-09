@@ -16,14 +16,14 @@ public class Arrays extends javax.swing.JFrame {
      * 
      */
     
-    private int[] vetor = new int[10]; // Array para armazenar os valores
+    private int[] vetor = new int[10]; // Array para guardar os valores
     private DefaultListModel<String> listModel = new DefaultListModel<>(); // Modelo da JList
-    private int selecionado = 0; // Índice da posição selecionada
+    private int selecionado = 0; // Inteiro para armazenar a posição
 
     public Arrays() {
         initComponents();
-        atualizarLista(); // Atualiza a lista ao iniciar
-        lstTabela.setSelectedIndex(0); // Seleciona a primeira posição como padrão
+        atualizarLista(); 
+        lstTabela.setSelectedIndex(0); // Escolhe a primeira posição como padrão
 
         // Adiciona um listener para capturar a posição selecionada
         lstTabela.addListSelectionListener(e -> {
@@ -106,20 +106,20 @@ public class Arrays extends javax.swing.JFrame {
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         // TODO add your handling code here:
         int numero = (int) spnNumero.getValue();
-        vetor[selecionado] = numero; // Adiciona o número na posição selecionada
-        atualizarLista(); // Atualiza a JList
+        vetor[selecionado] = numero; 
+        atualizarLista(); 
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         // TODO add your handling code here:
-        vetor[selecionado] = 0; // Define a posição selecionada como 0
-        atualizarLista(); // Atualiza a JList
+        vetor[selecionado] = 0; 
+        atualizarLista();
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void btnOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenarActionPerformed
         // TODO add your handling code here:
         java.util.Arrays.sort(vetor); // Ordena o array
-        atualizarLista(); // Atualiza a JList
+        atualizarLista(); 
     }//GEN-LAST:event_btnOrdenarActionPerformed
 
     /**
