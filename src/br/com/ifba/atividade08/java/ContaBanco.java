@@ -70,6 +70,42 @@ public class ContaBanco {
         }
     }
     
+    public void fecharBanco(){
+        if (this.saldoConta == 0){
+            this.setStatusConta(false);
+            System.out.println("Conta fechada com sucesso!");
+        } else if(this.saldoConta > 0 ){
+            System.out.println("A conta não pôde ser fechada. É necessário retirar o saldo.");
+        } else {
+            System.out.println("A conta não pôde ser fechada. É necessário quitar a dívida.");
+        }
+    }
     
+    public void depositar(int valor){
+        this.setSaldoConta(this.getSaldoConta() + valor);
+    }
     
+    public void sacar(int valor){
+        if (this.getSaldoConta() >= valor){
+            this.setSaldoConta(this.getSaldoConta() - valor);
+            System.out.printf("Foi sacado R$%d de sua conta.\nSaldo atual: R$%d", valor, this.getSaldoConta());
+        } else {
+            System.out.println("Saldo insuficiente para saque.");
+        }
+    }
+    
+    public void pagarMensal(){
+        if (this.isStatusConta() == true){
+            if (tipoConta.equals("cc")){
+                    this.setSaldoConta(getSaldoConta() - 12);
+                    System.out.printf("Foi sacado R$12 de sua conta.\nSaldo atual: R$%d", this.getSaldoConta());
+            }
+            if (tipoConta.equals("cp")){
+                    this.setSaldoConta(getSaldoConta() - 15);
+                    System.out.printf("Foi sacado R$15 de sua conta.\nSaldo atual: R$%d", this.getSaldoConta());
+            }
+        } else {
+            System.out.println("Conta fechada.");
+        }
+    }
 }
