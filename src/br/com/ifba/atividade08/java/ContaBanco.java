@@ -60,9 +60,14 @@ public class ContaBanco {
         this.setStatusConta(true);
         
         if(tipoConta.equals("cc")){
-            this.setSaldoConta
+            this.setSaldoConta(50);
+            System.out.println("Conta corrente criada com sucesso! Adicionado R$50 em sua conta.");
+        } else if (tipoConta.equals("cp")){
+            this.setSaldoConta(150);
+            System.out.println("Conta poupança criada com sucesso! Adicionado R$150 em sua conta.");
+        } else {
+            System.out.println("Tipo inválido! Selecione cc ou cp.");
         }
-        
     }
     
     
