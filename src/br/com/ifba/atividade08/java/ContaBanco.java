@@ -70,7 +70,7 @@ public class ContaBanco {
         }
     }
     
-    public void fecharBanco(){
+    public void fecharConta(){
         if (this.saldoConta == 0){
             this.setStatusConta(false);
             System.out.println("Conta fechada com sucesso!");
