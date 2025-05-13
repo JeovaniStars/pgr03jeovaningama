@@ -9,5 +9,6 @@ package br.com.ifba.atividade09.java;
  * @author Bruno
  */
 public interface Pagamento {
-    
+    double calcularTotal();
+    void imprimirRecibo();
 }
