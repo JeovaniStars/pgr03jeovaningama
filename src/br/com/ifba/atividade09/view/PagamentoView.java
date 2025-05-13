@@ -4,6 +4,13 @@
  */
 package br.com.ifba.atividade09.view;
 
+import br.com.ifba.atividade09.java.Pagamento;
+import br.com.ifba.atividade09.java.PagamentoCartao;
+import br.com.ifba.atividade09.java.PagamentoDinheiro;
+import br.com.ifba.atividade09.java.PagamentoPix;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 /**
  *
  * @author Bruno
@@ -26,22 +33,95 @@ public class PagamentoView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        lblTipoPagamento = new javax.swing.JLabel();
+        itmTipoPagamento = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtImpressao = new javax.swing.JTextArea();
+        lblValor = new javax.swing.JLabel();
+        spnValor = new javax.swing.JSpinner();
+        btnCalcular = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTipoPagamento.setText("Escolha a forma de pagamento:");
+        getContentPane().add(lblTipoPagamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        itmTipoPagamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PagamentoDinheiro", "PagamentoCartao", "PagamentoPix" }));
+        getContentPane().add(itmTipoPagamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        txtImpressao.setColumns(20);
+        txtImpressao.setRows(5);
+        jScrollPane1.setViewportView(txtImpressao);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 390, 190));
+
+        lblValor.setText("Valor da compra:");
+        getContentPane().add(lblValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
+
+        spnValor.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        getContentPane().add(spnValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 90, -1));
+
+        btnCalcular.setText("Calcular");
+        btnCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularActionPerfomed(evt);
+            }
+        });
+        getContentPane().add(btnCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCalcularActionPerfomed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerfomed
+        // TODO add your handling code here:
+         try {
+            double valor = ((Number) spnValor.getValue()).doubleValue();
+            String tipoPagamento = (String) itmTipoPagamento.getSelectedItem();
+            
+            Pagamento pagamento = criarPagamento(tipoPagamento, valor);
+            
+            // Redireciona a saída para capturar o recibo
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            PrintStream ps = new PrintStream(baos);
+            PrintStream old = System.out;
+            System.setOut(ps);
+            
+            // Executa os métodos
+            txtImpressao.setText("");
+            txtImpressao.append(String.format("Valor final: R$ %.2f\n\n", pagamento.calcularTotal()));
+            pagamento.imprimirRecibo();
+            
+            // Restaura a saída padrão
+            System.out.flush();
+            System.setOut(old);
+            
+            // Adiciona o recibo ao JTextArea
+            txtImpressao.append(baos.toString());
+            
+        } catch (NumberFormatException ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Por favor, insira um valor válido!", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    ex.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnCalcularActionPerfomed
+
+    private Pagamento criarPagamento(String tipo, double valor) {
+        switch (tipo) {
+            case "PagamentoDinheiro":
+                return new PagamentoDinheiro(valor);
+            case "PagamentoCartao":
+                return new PagamentoCartao(valor);
+            case "PagamentoPix":
+                return new PagamentoPix(valor);
+            default:
+                throw new IllegalArgumentException("Tipo de pagamento inválido");
+        }
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -78,5 +158,12 @@ public class PagamentoView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCalcular;
+    private javax.swing.JComboBox<String> itmTipoPagamento;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTipoPagamento;
+    private javax.swing.JLabel lblValor;
+    private javax.swing.JSpinner spnValor;
+    private javax.swing.JTextArea txtImpressao;
     // End of variables declaration//GEN-END:variables
 }
