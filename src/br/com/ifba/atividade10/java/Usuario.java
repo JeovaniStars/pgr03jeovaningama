@@ -15,10 +15,10 @@ public class Usuario {
     private String nomeUsuario;
     private String email;
     private String senha;
-    private DateTime ultimoLogin;
+    private LocalDateTime ultimoLogin;
     private Boolean ativo;
 
-    public Usuario(Long id, PerfilUsuario perfil, String nomeUsuario, String email, String senha, DateTime ultimoLogin, Boolean ativo) {
+    public Usuario(Long id, PerfilUsuario perfil, String nomeUsuario, String email, String senha, LocalDateTime ultimoLogin, Boolean ativo) {
         this.id = id;
         this.perfil = perfil;
         this.nomeUsuario = nomeUsuario;
@@ -70,7 +70,7 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public DateTime getUltimoLogin() {
+    public LocalDateTime getUltimoLogin() {
         return ultimoLogin;
     }
 
@@ -78,7 +78,7 @@ public class Usuario {
      *
      * @param ultimoLogin
      */
-    public void setUltimoLogin(DateTime ultimoLogin) {
+    public void setUltimoLogin(LocalDateTime ultimoLogin) {
         this.ultimoLogin = ultimoLogin;
     }
 
@@ -96,10 +96,21 @@ public class Usuario {
     public String toString() {
         return "Usuario{id=" + id + ", nomeUsuario='" + nomeUsuario + "', email='" + email + "'}";
     }
-
     
-    public void setUltimoLogin(DateTime ultimoLogin) {
-        this.ultimoLogin = ultimoLogin;
+    public boolean logar(String senha){
+        if (this.senha.equals(senha)){
+            this.ultimoLogin = LocalDateTime.now();
+            
+            //Cria o Log de Auditoria
+            LogAuditoria log = new LogAuditoria(this.id, "Login realizado em " + ultimoLogin.toString());
+            return true;
+        } else {
+            return false;
+        }
     }
     
+    public Sessao criarSessao() {
+        // Criar nova Sessao para este usuário (exemplo simples)
+        return new Sessao(this);
+    }
 }
