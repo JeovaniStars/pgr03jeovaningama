@@ -4,10 +4,13 @@
  */
 package br.com.ifba.atividade10.java;
 
+import java.util.List;
 /**
  *
  * @author Bruno
  */
 public class LogAuditoria {
     
+
+            
 }
