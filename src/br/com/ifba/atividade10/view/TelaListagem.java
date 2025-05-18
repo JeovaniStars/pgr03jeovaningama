@@ -4,6 +4,11 @@
  */
 package br.com.ifba.atividade10.view;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import br.com.ifba.atividade10.java.*;
+
 /**
  *
  * @author Bruno
@@ -15,8 +20,29 @@ public class TelaListagem extends javax.swing.JFrame {
      */
     public TelaListagem() {
         initComponents();
+        configurarModeloTabela();
     }
 
+    private void configurarModeloTabela() {
+        TableModel modeloTabela = new DefaultTableModel(
+                new Object[][]{}, // Começa vazia
+                new String[]{"ID", "Nome", "Email"} // Colunas
+        ) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Para a tabela não ser editável diretamente
+            }
+        };
+    jTable1.setModel(modeloTabela);
+}
+    
+    public void preencherTabela(List<Usuario> usuarios) {
+    modeloTabela.setRowCount(0); // Limpa tabela
+    for (Usuario u : usuarios) {
+        modeloTabela.addRow(new Object[]{u.getId(), u.getNome(), u.getEmail()});
+    }
+}
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,18 +52,52 @@ public class TelaListagem extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        lblListagemDeUsuarios = new javax.swing.JLabel();
+        lblFiltro = new javax.swing.JLabel();
+        txtFiltro = new javax.swing.JTextField();
+        btnPesquisar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        btnNovo = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblListagemDeUsuarios.setText("Listagem de Usuários");
+        getContentPane().add(lblListagemDeUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, -1));
+
+        lblFiltro.setText("Filtro:");
+        getContentPane().add(lblFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
+        getContentPane().add(txtFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 180, -1));
+
+        btnPesquisar.setText("Pesquisar");
+        getContentPane().add(btnPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, -1, -1));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Nome", "Email"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 310, 190));
+
+        btnNovo.setText("Novo");
+        getContentPane().add(btnNovo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
+
+        btnEditar.setText("Editar");
+        getContentPane().add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, -1, -1));
+
+        btnExcluir.setText("Excluir");
+        getContentPane().add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 310, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -78,5 +138,14 @@ public class TelaListagem extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnPesquisar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblFiltro;
+    private javax.swing.JLabel lblListagemDeUsuarios;
+    private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 }

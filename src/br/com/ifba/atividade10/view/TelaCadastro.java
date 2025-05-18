@@ -4,6 +4,9 @@
  */
 package br.com.ifba.atividade10.view;
 
+import br.com.ifba.atividade10.java.*;
+import java.util.List;
+
 /**
  *
  * @author Bruno
@@ -26,21 +29,120 @@ public class TelaCadastro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        lblCadastro = new javax.swing.JLabel();
+        lblNome = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
+        lblEmail = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        lblSenha = new javax.swing.JLabel();
+        pswSenha = new javax.swing.JPasswordField();
+        lblPerfil = new javax.swing.JLabel();
+        cmbPerfil = new javax.swing.JComboBox<>();
+        lblAtivo = new javax.swing.JLabel();
+        chkAtivo = new javax.swing.JCheckBox();
+        btnSalvar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblCadastro.setText("Cadastro");
+        getContentPane().add(lblCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+
+        lblNome.setText("Nome:");
+        getContentPane().add(lblNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
+
+        txtNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 170, -1));
+
+        lblEmail.setText("Email:");
+        getContentPane().add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 170, -1));
+
+        lblSenha.setText("Senha:");
+        getContentPane().add(lblSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+        getContentPane().add(pswSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 170, -1));
+
+        lblPerfil.setText("Perfil:");
+        getContentPane().add(lblPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
+
+        cmbPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Usuario", "Visitante" }));
+        cmbPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbPerfilActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cmbPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 170, -1));
+
+        lblAtivo.setText("Ativo?");
+        getContentPane().add(lblAtivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
+
+        chkAtivo.setText("Ativado");
+        getContentPane().add(chkAtivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
+
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // TODO add your handling code here:
+        String nome = txtNome.getText();
+    String email = txtEmail.getText();
+    String senha = new String(pswSenha.getPassword());
+    String perfil = (String) cmbPerfil.getSelectedItem();
+    boolean ativo = chkAtivo.isSelected();
+    
+    if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+    javax.swing.JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+    return;
+}
+    
+    // Exemplo de integração com a classe PerfilUsuario
+    PerfilUsuario usuario = new PerfilUsuario();
+    usuario.setDescricao(nome);
+    usuario.setId(1L); // Exemplo de ID fixo, pode ser gerado dinamicamente
+    usuario.setPermissoes(List.of(perfil)); // Convertendo perfil para lista
+
+    // Salvar no banco ou mostrar uma mensagem de sucesso
+    System.out.println("Usuário cadastrado: " + usuario);
+    javax.swing.JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!");
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        txtNome.setText("");
+    txtEmail.setText("");
+    pswSenha.setText("");
+    cmbPerfil.setSelectedIndex(0);
+    chkAtivo.setSelected(false);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void cmbPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPerfilActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbPerfilActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +180,18 @@ public class TelaCadastro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JCheckBox chkAtivo;
+    private javax.swing.JComboBox<String> cmbPerfil;
+    private javax.swing.JLabel lblAtivo;
+    private javax.swing.JLabel lblCadastro;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblPerfil;
+    private javax.swing.JLabel lblSenha;
+    private javax.swing.JPasswordField pswSenha;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }

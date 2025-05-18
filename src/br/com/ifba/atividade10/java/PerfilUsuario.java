@@ -4,6 +4,7 @@
  */
 package br.com.ifba.atividade10.java;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,10 +16,10 @@ public class PerfilUsuario {
     private String descricao;
     private List<String> permissoes;
 
-    public PerfilUsuario(Long id, String descricao, List<String> permissoes) {
-        this.id = id;
-        this.descricao = descricao;
-        this.permissoes = permissoes;
+    public PerfilUsuario() {
+        this.id = null;
+        this.descricao = "";
+        this.permissoes = new ArrayList<>();
     }
 
     //Getters e Setters

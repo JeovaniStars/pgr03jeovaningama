@@ -47,7 +47,11 @@ public class TelaLogin extends javax.swing.JFrame {
         lblSenha.setText("Senha:");
         getContentPane().add(lblSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
-        pswSenha.setText("jPasswordField1");
+        pswSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pswSenhaActionPerformed(evt);
+            }
+        });
         getContentPane().add(pswSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 120, -1));
 
         btnEntrar.setText("Entrar");
@@ -72,16 +76,21 @@ public class TelaLogin extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         // TODO add your handling code here:
         String usuario = txtUsuario.getText();
-    String senha = new String(pswSenha.getPassword());
+        String senha = new String(pswSenha.getPassword());
 
-    // Aqui você pode chamar seu método para validar o usuário, ex:
-    // boolean loginValido = controlador.validarLogin(usuario, senha);
-    
-    // Exemplo:
-    if(usuario.equals("admin") && senha.equals("1234")) {
-        System.out.println("Login OK");
+    // Exemplo de validação simples
+    if (usuario.equals("admin") && senha.equals("1234")) {
+        // Exibe a TelaPrincipal
+        TelaPrincipal telaPrincipal = new TelaPrincipal();
+        telaPrincipal.setVisible(true);
+
+        // Fecha a TelaLogin
+        this.dispose();
     } else {
-        System.out.println("Login inválido");
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Usuário ou senha inválidos!", 
+            "Erro", 
+            javax.swing.JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
@@ -90,6 +99,10 @@ public class TelaLogin extends javax.swing.JFrame {
         txtUsuario.setText("");
         pswSenha.setText("");
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void pswSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pswSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pswSenhaActionPerformed
 
     /**
      * @param args the command line arguments
