@@ -102,7 +102,11 @@ public class Usuario {
             this.ultimoLogin = LocalDateTime.now();
             
             //Cria o Log de Auditoria
-            LogAuditoria log = new LogAuditoria(this.id, "Login realizado em " + ultimoLogin.toString());
+            LogAuditoria log = new LogAuditoria(
+            this.id, 
+            "Login realizado em " + ultimoLogin.toString(),
+            ultimoLogin
+        );
             return true;
         } else {
             return false;

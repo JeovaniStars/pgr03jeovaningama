@@ -15,6 +15,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
+        btnLogAuditoria.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnLogAuditoriaActionPerformed(evt);
+    }
+});
     }
 
     /**
@@ -29,6 +34,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         lblBemVindo = new javax.swing.JLabel();
         btnCadastro = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
+        btnLogAuditoria = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -50,7 +56,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 btnSairActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        getContentPane().add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+
+        btnLogAuditoria.setText("LogAuditoria");
+        btnLogAuditoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogAuditoriaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLogAuditoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -66,6 +80,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnLogAuditoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogAuditoriaActionPerformed
+        // TODO add your handling code here:
+        TelaLogAuditoria telaLog = new TelaLogAuditoria();
+    telaLog.setVisible(true);
+    this.dispose();
+    }//GEN-LAST:event_btnLogAuditoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -104,6 +125,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastro;
+    private javax.swing.JButton btnLogAuditoria;
     private javax.swing.JButton btnSair;
     private javax.swing.JLabel lblBemVindo;
     // End of variables declaration//GEN-END:variables

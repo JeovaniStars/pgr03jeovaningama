@@ -16,7 +16,7 @@ public class Sessao {
     
     public Sessao(Usuario usuario) {
         this.usuario = usuario;
-        this.idSessao = UUID.randomUUID().toString();  // gera id único
+        this.idSessao = UUID.randomUUID().toString(); 
         this.dataCriacao = LocalDateTime.now();
     }
 
@@ -34,3 +34,5 @@ public class Sessao {
     
     
 }
+
+

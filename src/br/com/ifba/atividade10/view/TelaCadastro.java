@@ -129,6 +129,9 @@ public class TelaCadastro extends javax.swing.JFrame {
     // Salvar no banco ou mostrar uma mensagem de sucesso
     System.out.println("Usuário cadastrado: " + usuario);
     javax.swing.JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!");
+    this.dispose();  // Fecha a tela atual
+TelaPrincipal telaPrincipal = new TelaPrincipal();
+telaPrincipal.setVisible(true);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -138,6 +141,9 @@ public class TelaCadastro extends javax.swing.JFrame {
     pswSenha.setText("");
     cmbPerfil.setSelectedIndex(0);
     chkAtivo.setSelected(false);
+    this.dispose();
+TelaPrincipal telaPrincipal = new TelaPrincipal();
+telaPrincipal.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cmbPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPerfilActionPerformed

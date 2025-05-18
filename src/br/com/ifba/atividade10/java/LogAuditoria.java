@@ -1,46 +1,87 @@
 package br.com.ifba.atividade10.java;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LogAuditoria {
-    private String idLog;
-    private Long idUsuario;
-    private LocalDateTime dataEvento;
-    private String descricao;
 
-    public LogAuditoria(Long idUsuario, String descricao) {
-        this.idLog = UUID.randomUUID().toString();
-        this.idUsuario = idUsuario;
-        this.dataEvento = LocalDateTime.now();
-        this.descricao = descricao;
+    private Long id;
+    private String mensagem;
+    private LocalDateTime dataHora;
+
+    public LogAuditoria() {}
+
+    public LogAuditoria(long id, String mensagem, LocalDateTime dataHora) {
+        this.id = id;
+        this.mensagem = mensagem;
+        this.dataHora = dataHora;
     }
 
-    // Getters e setters
+    // Getters e Setters
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
+    public String getMensagem() { return mensagem; }
+    public void setMensagem(String mensagem) { this.mensagem = mensagem; }
+    public LocalDateTime getDataHora() { return dataHora; }
+    public void setDataHora(LocalDateTime dataHora) { this.dataHora = dataHora; }
 
-    public String getIdLog() {
-        return idLog;
+    // Simulação de "banco" em memória
+    private static List<LogAuditoria> logs = new ArrayList<>();
+
+    static {
+        logs.add(new LogAuditoria(1, "Login realizado", LocalDateTime.now().minusDays(1)));
+        logs.add(new LogAuditoria(2, "Usuário cadastrado", LocalDateTime.now().minusHours(3)));
+        logs.add(new LogAuditoria(3, "Erro ao acessar sistema", LocalDateTime.now().minusMinutes(30)));
+        logs.add(new LogAuditoria(4, "Login realizado", LocalDateTime.now().minusHours(5)));
     }
 
-    public Long getIdUsuario() {
-        return idUsuario;
+    // Buscar todos
+    public static List<LogAuditoria> buscarTodos() {
+        return new ArrayList<>(logs);
     }
 
-    public LocalDateTime getDataEvento() {
-        return dataEvento;
+    // Buscar por filtro simples na mensagem (case insensitive)
+    public static List<LogAuditoria> buscarPorFiltro(String filtro) {
+        if (filtro == null || filtro.isEmpty()) {
+            return buscarTodos();
+        }
+        return logs.stream()
+            .filter(log -> log.getMensagem().toLowerCase().contains(filtro.toLowerCase()))
+            .collect(Collectors.toList());
     }
 
-    public String getDescricao() {
-        return descricao;
+    // Buscar por ação exata (igualdade na mensagem, case insensitive)
+    public static List<LogAuditoria> buscarPorAcao(String acao) {
+        if (acao == null || acao.isEmpty()) {
+            return buscarTodos();
+        }
+        return logs.stream()
+            .filter(log -> log.getMensagem().equalsIgnoreCase(acao))
+            .collect(Collectors.toList());
     }
 
-    @Override
-    public String toString() {
-        return "LogAuditoria{" +
-                "idLog='" + idLog + '\'' +
-                ", idUsuario=" + idUsuario +
-                ", dataEvento=" + dataEvento +
-                ", descricao='" + descricao + '\'' +
-                '}';
+    // Buscar por intervalo de data (inclusive)
+    public static List<LogAuditoria> buscarPorData(LocalDateTime inicio, LocalDateTime fim) {
+        if (inicio == null && fim == null) {
+            return buscarTodos();
+        }
+        return logs.stream()
+            .filter(log -> {
+                LocalDateTime dt = log.getDataHora();
+                boolean depoisInicio = (inicio == null) || !dt.isBefore(inicio);
+                boolean antesFim = (fim == null) || !dt.isAfter(fim);
+                return depoisInicio && antesFim;
+            })
+            .collect(Collectors.toList());
+    }
+
+    // Buscar por ID
+    public static LogAuditoria buscarPorId(int id) {
+        return logs.stream()
+            .filter(log -> log.getId() == id)
+            .findFirst()
+            .orElse(null);
     }
 }
