@@ -24,4 +24,10 @@ public class Quadrado extends Forma2d{
     public double calcularPerimetro() {
         return 4 * lado;
     }
+    
+    @Override
+    public String toString() {
+        return super.toString() + ", lado = " + lado;
+    }
 }
+
