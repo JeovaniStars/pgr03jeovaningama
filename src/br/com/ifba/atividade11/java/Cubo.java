@@ -25,4 +25,10 @@ public class Cubo extends Forma3d{
     public double obterVolume(){
         return Math.pow(lado, 3);
     }
+    
+    @Override
+    public String toString() {
+        return super.toString() + ", lado = " + lado +
+               ", volume = " + obterVolume();
+    }
 }

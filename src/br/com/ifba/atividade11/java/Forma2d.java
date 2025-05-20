@@ -17,4 +17,9 @@ public class Forma2d extends Forma{
     public double obterArea(){
         return 0;
     }
+    
+    @Override
+    public String toString() {
+        return super.toString() + " (2D)";
+    }
 }

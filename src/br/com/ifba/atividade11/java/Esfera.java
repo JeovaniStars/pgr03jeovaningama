@@ -25,4 +25,11 @@ public class Esfera extends Forma3d{
     public double obterVolume() {
         return (4.0 / 3.0) * Math.PI * Math.pow(raio, 3);
     }
+    
+    @Override
+    public String toString() {
+        return super.toString() + ", raio = " + raio +
+               ", volume = " + obterVolume();
+    }
+    
 }

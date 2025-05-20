@@ -8,6 +8,21 @@ package br.com.ifba.atividade11.java;
  *
  * @author Bruno
  */
-public class Forma {
+abstract class Forma {
+    protected String nome;
+
+    public Forma(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
     
+    public abstract double obterArea();
+    
+     @Override
+    public String toString() {
+        return "Forma: " + nome;
+    }
 }

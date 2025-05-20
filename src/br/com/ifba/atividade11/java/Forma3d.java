@@ -23,4 +23,9 @@ public class Forma3d extends Forma {
         return 0;
     }
     
+    @Override
+    public String toString() {
+        return super.toString() + " (3D)";
+    }
+    
 }
