@@ -9,5 +9,19 @@ package br.com.ifba.atividade11.java;
  * @author Bruno
  */
 public class Quadrado extends Forma2d{
-    
+    private double lado;
+
+    public Quadrado(double lado) {
+        super("Quadrado");
+        this.lado = lado;
+    }
+
+    @Override
+    public double calcularArea() {
+        return lado * lado;
+    }
+
+    public double calcularPerimetro() {
+        return 4 * lado;
+    }
 }
