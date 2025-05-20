@@ -9,5 +9,12 @@ package br.com.ifba.atividade11.java;
  * @author Bruno
  */
 public class Forma2d extends Forma{
+    public Forma2d(String nome) {
+        super(nome);
+    }
     
+    @Override
+    public double obterArea(){
+        return 0;
+    }
 }

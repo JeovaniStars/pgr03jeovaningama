@@ -17,12 +17,12 @@ public class Cubo extends Forma3d{
     }
     
     @Override
-    public double calcularArea(){
+    public double obterArea(){
         return 6 * Math.pow(lado, 2);
     }
     
     @Override
-    public double calcularVolume(){
+    public double obterVolume(){
         return Math.pow(lado, 3);
     }
 }

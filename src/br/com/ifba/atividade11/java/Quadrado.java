@@ -17,7 +17,7 @@ public class Quadrado extends Forma2d{
     }
 
     @Override
-    public double calcularArea() {
+    public double obterArea() {
         return lado * lado;
     }
 
